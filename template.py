@@ -17,9 +17,11 @@ list_of_files = [
     f"{os.getcwd()}/test/__init__.py",
     f"{os.getcwd()}/{project_name}/__init__.py",
     f"{os.getcwd()}/{project_name}/config/__init__.py",
+    f"{os.getcwd()}/{project_name}/config/config.yaml",
     f"{os.getcwd()}/{project_name}/exceptions/__init__.py",
     f"{os.getcwd()}/{project_name}/model/__init__.py",
     f"{os.getcwd()}/{project_name}/logger/__init__.py",
+    f"{os.getcwd()}/{project_name}/logger/custom_logger.py",
     f"{os.getcwd()}/{project_name}/prompts/__init__.py",
     f"{os.getcwd()}/{project_name}/utils/__init__.py",
 ]
@@ -41,15 +43,13 @@ for filepath in list_of_files:
     else:
         logging.info(f"{filename} is already exists")
 
+
+###############custom exception file creation starts here###############
 path = f"{os.getcwd()}/{project_name}/exceptions/custom_exception.py"
-
-# Create directory if it doesn't exist
 os.makedirs(os.path.dirname(path), exist_ok=True)
-
 content = """import sys
 import traceback
 from typing import Optional, cast
-
 
 class DocumentPortalException(Exception):
     def __init__(self, error_message, error_details: Optional[object] = None):
@@ -100,9 +100,10 @@ class DocumentPortalException(Exception):
     def __repr__(self):
         return f"DocumentPortalException(file={self.file_name!r}, line={self.lineno}, message={self.error_message!r})"
 """
-
-with open(path, "w", encoding="utf-8") as file:
-    file.write(content)
-    
+with open(path, "r+", encoding="utf-8") as file:
+    if len(file.read()) == 0:
+        file.write(content)
 print(f"Successfully wrote {len(content)} characters to {path}")
 print(f"File created at: {os.path.abspath(path)}")
+
+
