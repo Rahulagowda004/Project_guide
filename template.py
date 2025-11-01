@@ -12,8 +12,6 @@ project_name = 'Chat_With_Rahul'
 list_of_files = [
     f"{os.getcwd()}/data/__init__.py",
     f"{os.getcwd()}/notebooks/__init__.py",
-    f"{os.getcwd()}/static/__init__.py",
-    f"{os.getcwd()}/templates/__init__.py",
     f"{os.getcwd()}/static/style.css",
     f"{os.getcwd()}/templates/index.html",
     f"{os.getcwd()}/{project_name}/tests/__init__.py",
