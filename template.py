@@ -16,9 +16,10 @@ list_of_files = [
     f"{os.getcwd()}/templates/__init__.py",
     f"{os.getcwd()}/static/style.css",
     f"{os.getcwd()}/templates/index.html",
-    f"{os.getcwd()}/test/__init__.py",
+    f"{os.getcwd()}/{project_name}/tests/__init__.py",
+    f"{os.getcwd()}/{project_name}/tests/integration/__init__.py",
+    f"{os.getcwd()}/{project_name}/tests/unit/__init__.py",
     f"{os.getcwd()}/{project_name}/__init__.py",
-    f"{os.getcwd()}/{project_name}/config/__init__.py",
     f"{os.getcwd()}/{project_name}/config/config.yaml",
     f"{os.getcwd()}/{project_name}/exceptions/__init__.py",
     f"{os.getcwd()}/{project_name}/model/__init__.py",
@@ -27,7 +28,6 @@ list_of_files = [
     f"{os.getcwd()}/{project_name}/prompts/__init__.py",
     f"{os.getcwd()}/{project_name}/utils/__init__.py",
 ]
-
 
 for filepath in list_of_files:
     filepath = Path(filepath)
