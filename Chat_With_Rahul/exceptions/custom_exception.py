@@ -1,52 +1,4 @@
-import os
-from pathlib import Path
-import logging
-
-#logging string
-logging.basicConfig(level=logging.INFO, format='[%(asctime)s]: %(message)s:')
-
-project_name = 'Chat_With_Rahul'
-
-list_of_files = [
-    f"{os.getcwd()}/data/__init__.py",
-    f"{os.getcwd()}/notebooks/__init__.py",
-    f"{os.getcwd()}/static/__init__.py",
-    f"{os.getcwd()}/templates/__init__.py",
-    f"{os.getcwd()}/static/style.css",
-    f"{os.getcwd()}/templates/index.html",
-    f"{os.getcwd()}/test/__init__.py",
-    f"{os.getcwd()}/{project_name}/__init__.py",
-    f"{os.getcwd()}/{project_name}/config/__init__.py",
-    f"{os.getcwd()}/{project_name}/exceptions/__init__.py",
-    f"{os.getcwd()}/{project_name}/model/__init__.py",
-    f"{os.getcwd()}/{project_name}/logger/__init__.py",
-    f"{os.getcwd()}/{project_name}/prompts/__init__.py",
-    f"{os.getcwd()}/{project_name}/utils/__init__.py",
-]
-
-
-for filepath in list_of_files:
-    filepath = Path(filepath)
-    filedir, filename = os.path.split(filepath)
-
-    if filedir !="":
-        os.makedirs(filedir, exist_ok=True)
-        logging.info(f"Creating directory; {filedir} for the file: {filename}")
-
-    if (not os.path.exists(filepath)) or (os.path.getsize(filepath) == 0):
-        with open(filepath, "w") as f:
-            pass
-            logging.info(f"Creating empty file: {filepath}")
-            
-    else:
-        logging.info(f"{filename} is already exists")
-
-path = f"{os.getcwd()}/{project_name}/exceptions/custom_exception.py"
-
-# Create directory if it doesn't exist
-os.makedirs(os.path.dirname(path), exist_ok=True)
-
-content = """import sys
+import sys
 import traceback
 from typing import Optional, cast
 
@@ -94,15 +46,8 @@ class DocumentPortalException(Exception):
         # Compact, logger-friendly message (no leading spaces)
         base = f"Error in [{self.file_name}] at line [{self.lineno}] | Message: {self.error_message}"
         if self.traceback_str:
-            return f"{base}\\nTraceback:\\n{self.traceback_str}"
+            return f"{base}\nTraceback:\n{self.traceback_str}"
         return base
 
     def __repr__(self):
         return f"DocumentPortalException(file={self.file_name!r}, line={self.lineno}, message={self.error_message!r})"
-"""
-
-with open(path, "w", encoding="utf-8") as file:
-    file.write(content)
-    
-print(f"Successfully wrote {len(content)} characters to {path}")
-print(f"File created at: {os.path.abspath(path)}")
