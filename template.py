@@ -22,6 +22,7 @@ list_of_files = [
     f"{os.getcwd()}/{project_name}/__init__.py",
     f"{os.getcwd()}/{project_name}/config/config.yaml",
     f"{os.getcwd()}/{project_name}/exceptions/__init__.py",
+    f"{os.getcwd()}/{project_name}/exceptions/custom_exception.py",
     f"{os.getcwd()}/{project_name}/model/__init__.py",
     f"{os.getcwd()}/{project_name}/logger/__init__.py",
     f"{os.getcwd()}/{project_name}/logger/custom_logger.py",
