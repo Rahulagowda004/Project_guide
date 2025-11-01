@@ -1,6 +1,8 @@
 import os
 from pathlib import Path
 import logging
+import subprocess
+import sys
 
 #logging string
 logging.basicConfig(level=logging.INFO, format='[%(asctime)s]: %(message)s:')
@@ -107,6 +109,30 @@ print(f"Successfully wrote {len(content)} characters to {path}")
 print(f"File created at: {os.path.abspath(path)}")
 
 ###############custom logger file creation
+def ensure_structlog():
+    try:
+        import structlog  # type: ignore
+        print("structlog already installed:", structlog.__version__)
+        return
+    except ImportError:
+        print("structlog not found — installing...")
+
+    # Prefer using `uv add structlog` if `uv` CLI is available, otherwise fall back to pip
+    try:
+        subprocess.check_call(["uv", "add", "structlog"])
+    except FileNotFoundError:
+        # `uv` CLI not found — fall back to pip
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "structlog"])
+    except subprocess.CalledProcessError:
+        # `uv` failed — fall back to pip
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "structlog"])
+
+    import importlib
+    importlib.invalidate_caches()
+    pkg = __import__("structlog")
+    print("Installed structlog:", getattr(pkg, "__version__", "unknown"))
+    
+ensure_structlog()
 path = f"{os.getcwd()}/{project_name}/logger/custom_logger.py"
 os.makedirs(os.path.dirname(path), exist_ok=True)
 content = """import os
